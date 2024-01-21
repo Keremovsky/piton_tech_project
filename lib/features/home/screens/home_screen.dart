@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:piton_tech_project/core/constants/data_constants.dart';
 import 'package:piton_tech_project/core/constants/theme_constants.dart';
 import 'package:piton_tech_project/core/custom_icons_icons.dart';
 import 'package:piton_tech_project/core/utils/custom_button.dart';
 import 'package:piton_tech_project/features/home/widgets/custom_drawer.dart';
+import 'package:piton_tech_project/features/home/widgets/music_box.dart';
+import 'package:piton_tech_project/models/music_model.dart';
 import 'package:piton_tech_project/themes/palette.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +19,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _controller = TextEditingController();
   final OutlineInputBorder _textFieldBorder = ThemeConstants().textFieldBorder;
-  final List<String> _categories = ["All", "Life", "Comedy", "Technology"];
+
+  final List<String> _categories = DataConstants().categories;
+  final List<MusicModel> _musics = DataConstants().musicData;
 
   @override
   Widget build(BuildContext context) {
@@ -102,9 +107,22 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 5),
               Expanded(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  children: [],
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 1 / 1.4,
+                  ),
+                  itemCount: _musics.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return MusicBox(
+                      onTap: () {},
+                      image: Image.asset(_musics[index].image),
+                      titleText: _musics[index].title,
+                      descriptionText: _musics[index].artist,
+                    );
+                  },
                 ),
               ),
             ],

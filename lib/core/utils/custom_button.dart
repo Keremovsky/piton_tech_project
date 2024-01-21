@@ -52,13 +52,13 @@ class CustomButton extends StatelessWidget {
         width: width,
         child: Card(
           color: backgroundColor,
-          elevation: elevation ?? 1,
+          elevation: elevation ?? 0,
           shape: RoundedRectangleBorder(
-            borderRadius: borderRadius ?? BorderRadius.circular(10),
+            borderRadius: borderRadius ?? const BorderRadius.only(),
           ),
           child: InkWell(
             onTap: onTap,
-            borderRadius: borderRadius ?? BorderRadius.circular(10),
+            borderRadius: borderRadius,
             child: Padding(
               padding: innerPadding ?? const EdgeInsets.only(),
               child: Center(child: child),
