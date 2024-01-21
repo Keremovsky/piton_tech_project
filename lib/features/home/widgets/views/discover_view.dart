@@ -14,7 +14,7 @@ class DiscoverView extends StatefulWidget {
 }
 
 class _DiscoverScreenState extends State<DiscoverView> {
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
   final OutlineInputBorder _textFieldBorder = ThemeConstants().textFieldBorder;
 
   final List<String> _categories = DataConstants().categories;
@@ -22,7 +22,7 @@ class _DiscoverScreenState extends State<DiscoverView> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _textController.dispose();
     super.dispose();
   }
 
@@ -31,7 +31,7 @@ class _DiscoverScreenState extends State<DiscoverView> {
     return Column(
       children: [
         TextField(
-          controller: _controller,
+          controller: _textController,
           style: Theme.of(context).textTheme.displayMedium,
           decoration: InputDecoration(
             filled: true,

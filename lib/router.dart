@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:piton_tech_project/core/constants/router_constants.dart';
 import 'package:piton_tech_project/features/home/screens/home_screen.dart';
+import 'package:piton_tech_project/features/notification/screens/notification_screen.dart';
 
 class AppRouter {
   final GoRouter router = GoRouter(
@@ -12,6 +13,15 @@ class AppRouter {
         pageBuilder: (context, state) {
           return const MaterialPage(
             child: HomeScreen(),
+          );
+        },
+      ),
+      GoRoute(
+        path: RouterConstants.notificationScreenPath,
+        name: RouterConstants.notificationScreenName,
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: NotificationScreen(),
           );
         },
       ),

@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:piton_tech_project/core/constants/router_constants.dart';
 import 'package:piton_tech_project/features/home/widgets/views/discover_view.dart';
 import 'package:piton_tech_project/features/home/widgets/views/library_view.dart';
+import 'package:piton_tech_project/features/notification/service/notification_service.dart';
 import 'package:piton_tech_project/themes/theme_constants.dart';
 import 'package:piton_tech_project/core/custom_icons_icons.dart';
 import 'package:piton_tech_project/features/home/widgets/custom_drawer.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final PageController _pageController = PageController();
   int _currentIndex = 0;
@@ -53,8 +57,30 @@ class _HomeScreenState extends State<HomeScreen> {
           centerTitle: true,
           actions: [
             IconButton(
-              onPressed: () {},
-              icon: const Icon(CustomIcons.notify_no),
+              onPressed: () {
+                context.pushNamed(RouterConstants.notificationScreenName);
+              },
+              icon: Consumer(
+                builder: (context, ref, child) {
+                  return ref.watch(notificationStreamProvider).when(
+                    data: (data) {
+                      for (final n in data) {
+                        if (n.isSeen == false) {
+                          return const Badge(
+                              child: Icon(CustomIcons.notify_no));
+                        }
+                      }
+                      return const Icon(CustomIcons.notify_no);
+                    },
+                    error: (error, stackTrace) {
+                      return const SizedBox();
+                    },
+                    loading: () {
+                      return const SizedBox();
+                    },
+                  );
+                },
+              ),
             ),
           ],
         ),
@@ -66,9 +92,9 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                DiscoverView(),
-                LibraryView(),
-                Text("b"),
+                const DiscoverView(),
+                const LibraryView(),
+                const Text("b"),
               ],
             ),
           ),

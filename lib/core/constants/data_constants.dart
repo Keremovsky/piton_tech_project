@@ -1,5 +1,6 @@
 import 'package:piton_tech_project/core/constants/assets_constants.dart';
 import 'package:piton_tech_project/models/music_model.dart';
+import 'package:piton_tech_project/models/notification_model.dart';
 
 class DataConstants {
   final categories = ["All", "Life", "Comedy", "Technology"];
@@ -27,6 +28,26 @@ class DataConstants {
       artist: "Denny Kulon",
       image: AssetsConstants.albumPhoto3,
       music: "",
+    ),
+  ];
+  final notificationData = [
+    NotificationModel(
+      title: "Rammstein New Album",
+      description: "New Rammstein album will be released in August 2024!",
+      image: AssetsConstants.rammstein,
+      isSeen: false,
+    ),
+    NotificationModel(
+      title: "Golden Requiem",
+      description: "New Jojo's Bizarre Adventure song just released!",
+      image: AssetsConstants.goldenRequiem,
+      isSeen: false,
+    ),
+    NotificationModel(
+      title: "Similar to Feel Good Inc.",
+      description: "Rhinestone Eyes is similar to songs that you listen.",
+      image: AssetsConstants.feelGood,
+      isSeen: false,
     ),
   ];
 }
