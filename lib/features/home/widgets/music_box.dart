@@ -49,14 +49,10 @@ class MusicBox extends StatelessWidget {
               style: titleStyle ?? Theme.of(context).textTheme.displayMedium,
             ),
             const SizedBox(height: 5),
-            Row(
-              children: [
-                Text(
-                  descriptionText,
-                  style: descriptionStyle ??
-                      Theme.of(context).textTheme.displaySmall,
-                ),
-              ],
+            Text(
+              descriptionText,
+              style:
+                  descriptionStyle ?? Theme.of(context).textTheme.displaySmall,
             ),
           ],
         ),

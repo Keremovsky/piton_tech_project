@@ -68,4 +68,17 @@ final ThemeData _theme = ThemeData(
   drawerTheme: const DrawerThemeData(
     backgroundColor: Palette.background,
   ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Palette.bottomBar,
+    selectedItemColor: Palette.fullWhite,
+    unselectedItemColor: Palette.iconGrey,
+    selectedLabelStyle: TextStyle(
+      fontSize: 10,
+      color: Palette.textGrey,
+    ),
+    unselectedLabelStyle: TextStyle(
+      fontSize: 10,
+      color: Palette.fullWhite,
+    ),
+  ),
 );
