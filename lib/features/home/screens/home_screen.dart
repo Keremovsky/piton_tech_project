@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:piton_tech_project/features/home/widgets/views/discover_view.dart';
+import 'package:piton_tech_project/features/home/widgets/views/library_view.dart';
 import 'package:piton_tech_project/themes/theme_constants.dart';
 import 'package:piton_tech_project/core/custom_icons_icons.dart';
 import 'package:piton_tech_project/features/home/widgets/custom_drawer.dart';
@@ -66,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 DiscoverView(),
-                Text("a"),
+                LibraryView(),
                 Text("b"),
               ],
             ),

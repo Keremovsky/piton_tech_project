@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:piton_tech_project/core/services/storage_service.dart';
 import 'package:piton_tech_project/router.dart';
@@ -11,11 +12,14 @@ void main() {
   // initialize storage service
   StorageService();
 
-  runApp(const ProviderScope(child: MyApp()));
+  final router = AppRouter().router;
+  runApp(ProviderScope(child: MyApp(router: router)));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final GoRouter router;
+
+  const MyApp({super.key, required this.router});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,7 @@ class MyApp extends StatelessWidget {
       title: 'Piton Tech Project',
       debugShowCheckedModeBanner: false,
       theme: _theme,
-      routerConfig: AppRouter().router,
+      routerConfig: router,
     );
   }
 }
