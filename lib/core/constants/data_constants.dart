@@ -4,6 +4,8 @@ import 'package:piton_tech_project/models/notification_model.dart';
 
 class DataConstants {
   final categories = ["All", "Life", "Comedy", "Technology"];
+  final onBoardText =
+      "A podcast is an episodic series of spoken word digital audio files that a user can download to a personal device for easy listening.";
   final musicData = [
     MusicModel(
       title: "The missing 96 percent of the universe",

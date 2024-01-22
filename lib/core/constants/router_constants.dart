@@ -5,4 +5,6 @@ class RouterConstants {
   static const notificationScreenName = "notificationScreen";
   static const musicScreenPath = "/musicScreen";
   static const musicScreenName = "musicScreen";
+  static const onBoardScreenPath = "/onBoardScreen";
+  static const onBoardScreenName = "onBoardScreen";
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:piton_tech_project/core/constants/key_constants.dart';
 import 'package:piton_tech_project/core/constants/router_constants.dart';
+import 'package:piton_tech_project/core/services/storage_service.dart';
 import 'package:piton_tech_project/features/home/screens/home_screen.dart';
 import 'package:piton_tech_project/features/audio/screens/music_screen.dart';
+import 'package:piton_tech_project/features/on_board/screens/on_board_screen.dart';
 import 'package:piton_tech_project/features/notification/screens/notification_screen.dart';
 
 class AppRouter {
@@ -35,6 +38,29 @@ class AppRouter {
           );
         },
       ),
+      GoRoute(
+        path: RouterConstants.onBoardScreenPath,
+        name: RouterConstants.onBoardScreenName,
+        pageBuilder: (context, state) {
+          return const MaterialPage(
+            child: OnBoardScreen(),
+          );
+        },
+      ),
     ],
+    redirect: (context, state) {
+      // get showOnBoard variable from local
+      final StorageService storageService = StorageService();
+      final showOnBoard =
+          storageService.getData(KeyConstants.showOnBoard) as bool? ?? true;
+
+      // control if user opened app for the first time
+      if (showOnBoard) {
+        storageService.setBool(KeyConstants.showOnBoard, false);
+        return RouterConstants.onBoardScreenPath;
+      } else {
+        return null;
+      }
+    },
   );
 }
