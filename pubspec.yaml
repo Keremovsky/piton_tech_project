@@ -38,6 +38,10 @@ dependencies:
   flutter_riverpod: ^2.4.9
   go_router: ^13.0.1
   google_fonts: ^6.1.0
+  just_audio: ^0.9.36
+  just_audio_windows: ^0.2.0
+  just_audio_mpv: ^0.1.7
+  touchable: ^1.0.2
 
 dev_dependencies:
   flutter_test:

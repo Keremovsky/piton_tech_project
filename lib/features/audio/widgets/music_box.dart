@@ -1,9 +1,36 @@
 import 'package:flutter/material.dart';
 
 class MusicBox extends StatelessWidget {
+  /// A widget that shows title, description and photo of music.
+  ///
+  /// [onTap]: Callback function when the music box is tapped.
+  ///
+  /// [backgroundColor]: Background color of the music box.
+  ///
+  /// [height]: Height of the music box.
+  ///
+  /// [width]: Width of the music box.
+  ///
+  /// [elevation]: Elevation of the music box.
+  ///
+  /// [borderRadius]: Border radius of the music box.
+  ///
+  /// [padding]: Padding of the music box.
+  ///
+  /// [innerPadding]: Padding of the content.
+  ///
+  /// [image]: Image of music.
+  ///
+  /// [title]: The title of the music box.
+  ///
+  /// [titleStyle]: The style of the title.
+  ///
+  /// [description]: The description of the music box.
+  ///
+  /// [descriptionStyle]: The style of description.
   const MusicBox({
     super.key,
-    required this.onTap,
+    this.onTap,
     this.backgroundColor,
     this.height,
     this.width,
@@ -18,7 +45,7 @@ class MusicBox extends StatelessWidget {
     this.descriptionStyle,
   });
 
-  final Function() onTap;
+  final Function()? onTap;
   final Color? backgroundColor;
   final double? height;
   final double? width;

@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:piton_tech_project/core/constants/data_constants.dart';
+import 'package:piton_tech_project/core/constants/router_constants.dart';
 import 'package:piton_tech_project/core/utils/custom_button.dart';
-import 'package:piton_tech_project/features/home/widgets/music_box.dart';
+import 'package:piton_tech_project/features/audio/audio_service/audio_service.dart';
+import 'package:piton_tech_project/features/audio/widgets/music_box.dart';
 import 'package:piton_tech_project/models/music_model.dart';
 import 'package:piton_tech_project/themes/palette.dart';
 import 'package:piton_tech_project/themes/theme_constants.dart';
 
-class DiscoverView extends StatefulWidget {
+class DiscoverView extends ConsumerStatefulWidget {
   const DiscoverView({super.key});
 
   @override
-  State<DiscoverView> createState() => _DiscoverScreenState();
+  ConsumerState<DiscoverView> createState() => _DiscoverScreenState();
 }
 
-class _DiscoverScreenState extends State<DiscoverView> {
+class _DiscoverScreenState extends ConsumerState<DiscoverView> {
   final TextEditingController _textController = TextEditingController();
   final OutlineInputBorder _textFieldBorder = ThemeConstants().textFieldBorder;
 
@@ -92,7 +96,15 @@ class _DiscoverScreenState extends State<DiscoverView> {
             itemCount: _musics.length,
             itemBuilder: (BuildContext context, int index) {
               return MusicBox(
-                onTap: () {},
+                onTap: () async {
+                  await ref.read(audioServiceProvider.notifier).updateAudio(
+                        _musics,
+                        index,
+                      );
+                  if (mounted) {
+                    context.pushNamed(RouterConstants.musicScreenName);
+                  }
+                },
                 image: Image.asset(
                   _musics[index].image,
                   fit: BoxFit.cover,

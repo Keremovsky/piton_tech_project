@@ -91,10 +91,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: PageView(
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
-              children: [
-                const DiscoverView(),
-                const LibraryView(),
-                const Text("b"),
+              children: const [
+                DiscoverView(),
+                LibraryView(),
+                Text("Profile"),
               ],
             ),
           ),

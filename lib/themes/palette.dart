@@ -9,4 +9,5 @@ class Palette {
   static const notificationRed = Color.fromRGBO(236, 79, 60, 1);
   static const bottomBar = Color.fromRGBO(37, 40, 54, 1);
   static const button = Color.fromRGBO(47, 49, 66, 1);
+  static const volumeBarGrey = Color.fromRGBO(87, 85, 96, 1);
 }

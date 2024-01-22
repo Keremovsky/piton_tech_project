@@ -17,7 +17,7 @@ class CustomButton extends StatelessWidget {
   ///
   /// [padding]: Padding of the button.
   ///
-  /// [padding]: Padding of the child.
+  /// [innerPadding]: Padding of the child.
   ///
   /// [child]: The content of the button.
   const CustomButton({
