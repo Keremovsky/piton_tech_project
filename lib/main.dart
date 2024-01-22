@@ -33,56 +33,59 @@ class MyApp extends StatelessWidget {
 }
 
 final ThemeData _theme = ThemeData(
-  scaffoldBackgroundColor: Palette.background,
-  textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-    titleLarge: const TextStyle(
-      fontSize: 36,
-      fontWeight: FontWeight.bold,
+    scaffoldBackgroundColor: Palette.background,
+    textTheme: GoogleFonts.poppinsTextTheme().copyWith(
+      titleLarge: const TextStyle(
+        fontSize: 36,
+        fontWeight: FontWeight.bold,
+        color: Palette.fullWhite,
+      ),
+      titleMedium: const TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: Palette.fullWhite,
+      ),
+      titleSmall: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: Palette.fullWhite,
+      ),
+      displayLarge: const TextStyle(
+        fontSize: 18,
+        color: Palette.fullWhite,
+      ),
+      displayMedium: const TextStyle(
+        fontSize: 14,
+        color: Palette.fullWhite,
+      ),
+      displaySmall: const TextStyle(
+        fontSize: 10,
+        color: Palette.textGrey,
+      ),
+    ),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+      iconTheme: IconThemeData(
+        color: Palette.iconWhite,
+      ),
+    ),
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: Palette.background,
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Palette.bottomBar,
+      selectedItemColor: Palette.fullWhite,
+      unselectedItemColor: Palette.iconGrey,
+      selectedLabelStyle: TextStyle(
+        fontSize: 10,
+        color: Palette.textGrey,
+      ),
+      unselectedLabelStyle: TextStyle(
+        fontSize: 10,
+        color: Palette.fullWhite,
+      ),
+    ),
+    iconTheme: const IconThemeData(
       color: Palette.fullWhite,
-    ),
-    titleMedium: const TextStyle(
-      fontSize: 24,
-      fontWeight: FontWeight.bold,
-      color: Palette.fullWhite,
-    ),
-    titleSmall: const TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.bold,
-      color: Palette.fullWhite,
-    ),
-    displayLarge: const TextStyle(
-      fontSize: 18,
-      color: Palette.fullWhite,
-    ),
-    displayMedium: const TextStyle(
-      fontSize: 14,
-      color: Palette.fullWhite,
-    ),
-    displaySmall: const TextStyle(
-      fontSize: 10,
-      color: Palette.textGrey,
-    ),
-  ),
-  appBarTheme: const AppBarTheme(
-    backgroundColor: Colors.transparent,
-    iconTheme: IconThemeData(
-      color: Palette.iconWhite,
-    ),
-  ),
-  drawerTheme: const DrawerThemeData(
-    backgroundColor: Palette.background,
-  ),
-  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: Palette.bottomBar,
-    selectedItemColor: Palette.fullWhite,
-    unselectedItemColor: Palette.iconGrey,
-    selectedLabelStyle: TextStyle(
-      fontSize: 10,
-      color: Palette.textGrey,
-    ),
-    unselectedLabelStyle: TextStyle(
-      fontSize: 10,
-      color: Palette.fullWhite,
-    ),
-  ),
-);
+      size: 24,
+    ));

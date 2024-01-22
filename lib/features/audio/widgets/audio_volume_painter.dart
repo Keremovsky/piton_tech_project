@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:piton_tech_project/themes/palette.dart';
-import 'package:touchable/touchable.dart';
 
 class AudioVolumePainter extends CustomPainter {
   /// A painter that paints one volume component in the audio progress bar.
