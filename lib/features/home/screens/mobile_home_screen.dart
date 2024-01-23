@@ -9,6 +9,7 @@ import 'package:piton_tech_project/features/notification/service/notification_se
 import 'package:piton_tech_project/themes/palette.dart';
 import 'package:piton_tech_project/core/custom_icons_icons.dart';
 import 'package:piton_tech_project/features/home/widgets/custom_drawer.dart';
+import 'package:piton_tech_project/themes/theme_constants.dart';
 
 class MobileHomeScreen extends ConsumerStatefulWidget {
   const MobileHomeScreen({super.key});
@@ -101,8 +102,14 @@ class _HomeScreenState extends ConsumerState<MobileHomeScreen> {
             controller: _pageController,
             physics: const NeverScrollableScrollPhysics(),
             children: const [
-              DiscoverView(),
-              LibraryView(),
+              Padding(
+                padding: ThemeConstants.screenPadding,
+                child: DiscoverView(),
+              ),
+              Padding(
+                padding: ThemeConstants.screenPadding,
+                child: LibraryView(),
+              ),
               ProfileView(),
             ],
           ),

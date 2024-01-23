@@ -1,5 +1,6 @@
 import 'dart:math';
 
+// format duration to get time as hour:minute:seconds
 String formatMusicDuration(Duration? duration) {
   if (duration == null) return "00:00";
   String twoDigits(int n) => n.toString().padLeft(2, "0");
@@ -14,6 +15,7 @@ String formatMusicDuration(Duration? duration) {
   }
 }
 
+// get random double numbers
 List<double> getRandomDoubles(int count) {
   final random = Random();
 

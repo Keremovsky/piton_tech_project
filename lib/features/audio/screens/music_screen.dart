@@ -50,78 +50,79 @@ class _MusicScreenState extends ConsumerState<MusicScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          child: Column(
-            children: [
-              // music data
-              StreamBuilder(
-                stream: _audioService.currentMusicStream,
-                builder: (context, snapshot) {
-                  final currentMusic = snapshot.data;
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // music data
+                StreamBuilder(
+                  stream: _audioService.currentMusicStream,
+                  builder: (context, snapshot) {
+                    final currentMusic = snapshot.data;
 
-                  if (currentMusic == null) {
-                    return const SizedBox();
-                  }
-
-                  return MusicBox(
-                    image: ImageDemonstrator(
-                      imageProvider: AssetImage(currentMusic.image),
+                    if (currentMusic == null) {
+                      return const SizedBox();
+                    }
+                    return MusicBox(
+                      image: ImageDemonstrator(
+                        imageProvider: AssetImage(currentMusic.image),
+                      ),
+                      titleText: currentMusic.title,
+                      titleStyle: Theme.of(context)
+                          .textTheme
+                          .titleSmall!
+                          .copyWith(fontWeight: FontWeight.normal),
+                      descriptionText: currentMusic.artist,
+                      descriptionStyle: Theme.of(context)
+                          .textTheme
+                          .displayMedium!
+                          .copyWith(color: Palette.textGrey),
+                    );
+                  },
+                ),
+                const SizedBox(height: 15),
+                const AudioProgressBar(height: 40), // progress bar
+                const SizedBox(height: 10),
+                // display duration
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    StreamBuilder(
+                      stream: _audioService.positionStream,
+                      builder: (context, snapshot) {
+                        final dur = snapshot.data;
+                        if (dur == null) {
+                          return Text(
+                            formatMusicDuration(Duration.zero),
+                            style: Theme.of(context).textTheme.displayMedium,
+                          );
+                        }
+                        return Text(
+                          formatMusicDuration(snapshot.data!),
+                          style: Theme.of(context).textTheme.displayMedium,
+                        );
+                      },
                     ),
-                    titleText: currentMusic.title,
-                    titleStyle: Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .copyWith(fontWeight: FontWeight.normal),
-                    descriptionText: currentMusic.artist,
-                    descriptionStyle: Theme.of(context)
-                        .textTheme
-                        .displayMedium!
-                        .copyWith(color: Palette.textGrey),
-                  );
-                },
-              ),
-              const SizedBox(height: 15),
-              const AudioProgressBar(height: 40), // progress bar
-              const SizedBox(height: 10),
-              // display duration
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  StreamBuilder(
-                    stream: _audioService.positionStream,
-                    builder: (context, snapshot) {
-                      final dur = snapshot.data;
-                      if (dur == null) {
+                    StreamBuilder(
+                      stream: _audioService.durationStream,
+                      builder: (context, snapshot) {
+                        final dur = snapshot.data;
+                        if (dur == null) {
+                          return Text(
+                            formatMusicDuration(Duration.zero),
+                            style: Theme.of(context).textTheme.displayMedium,
+                          );
+                        }
                         return Text(
-                          formatMusicDuration(Duration.zero),
+                          formatMusicDuration(snapshot.data),
                           style: Theme.of(context).textTheme.displayMedium,
                         );
-                      }
-                      return Text(
-                        formatMusicDuration(snapshot.data!),
-                        style: Theme.of(context).textTheme.displayMedium,
-                      );
-                    },
-                  ),
-                  StreamBuilder(
-                    stream: _audioService.durationStream,
-                    builder: (context, snapshot) {
-                      final dur = snapshot.data;
-                      if (dur == null) {
-                        return Text(
-                          formatMusicDuration(Duration.zero),
-                          style: Theme.of(context).textTheme.displayMedium,
-                        );
-                      }
-                      return Text(
-                        formatMusicDuration(snapshot.data),
-                        style: Theme.of(context).textTheme.displayMedium,
-                      );
-                    },
-                  ),
-                ],
-              ),
-              const PlayerController(), // player controller
-            ],
+                      },
+                    ),
+                  ],
+                ),
+                const PlayerController(), // player controller
+              ],
+            ),
           ),
         ),
       ),

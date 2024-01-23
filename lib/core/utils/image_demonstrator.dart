@@ -1,25 +1,36 @@
 import 'package:flutter/material.dart';
 
 class ImageDemonstrator extends StatelessWidget {
-  final ImageProvider imageProvider;
-  final double? height;
-  final double? width;
-  final EdgeInsetsGeometry outerPadding;
-  final BorderRadius borderRadius;
-
+  /// Widget that display image.
+  ///
+  /// [imageProvider]: Image provider that will be shown.
+  ///
+  /// [height]: Height of image.
+  ///
+  /// [width]: Width of image.
+  ///
+  /// [padding]: Padding of the image.
+  ///
+  /// [borderRadius]: Border radius of image.
   const ImageDemonstrator({
     super.key,
     required this.imageProvider,
     this.height,
     this.width,
-    this.outerPadding = const EdgeInsets.only(),
+    this.padding = const EdgeInsets.only(),
     this.borderRadius = BorderRadius.zero,
   });
+
+  final ImageProvider imageProvider;
+  final double? height;
+  final double? width;
+  final EdgeInsetsGeometry padding;
+  final BorderRadius borderRadius;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: outerPadding,
+      padding: padding,
       child: ClipRRect(
         borderRadius: borderRadius,
         child: SizedBox(

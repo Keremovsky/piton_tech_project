@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class CustomCircularProgressIndicator extends StatelessWidget {
-  final double size;
-  final Color color;
-
+  /// Custom circular progress indicator.
+  ///
+  /// [size]: Size of progress indicator.
+  ///
+  /// [color]: Color of progress indicator.
   const CustomCircularProgressIndicator({
     super.key,
     required this.size,
     required this.color,
   });
+
+  final double size;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
