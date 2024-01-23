@@ -2,18 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:piton_tech_project/features/home/widgets/custom_drawer_button.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({super.key});
+  final EdgeInsets? padding;
+  final Color? color;
+  final BorderRadius? borderRadius;
+
+  const CustomDrawer({
+    super.key,
+    this.padding,
+    this.color,
+    this.borderRadius,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return Material(
+      color: color,
+      elevation: 16,
+      borderRadius: borderRadius,
       child: Padding(
-        padding: const EdgeInsets.only(
-          top: 35,
-          bottom: 10,
-          left: 10,
-          right: 10,
-        ),
+        padding: padding ?? const EdgeInsets.only(),
         child: Column(
           children: [
             CustomDrawerButton(

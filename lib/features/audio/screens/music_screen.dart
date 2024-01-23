@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:piton_tech_project/core/utils.dart';
+import 'package:piton_tech_project/core/utils/image_demonstrator.dart';
 import 'package:piton_tech_project/features/audio/audio_service/audio_service.dart';
 import 'package:piton_tech_project/features/audio/widgets/audio_progress_bar.dart';
 import 'package:piton_tech_project/features/audio/widgets/music_box.dart';
@@ -62,7 +63,9 @@ class _MusicScreenState extends ConsumerState<MusicScreen> {
                   }
 
                   return MusicBox(
-                    image: Image.asset(currentMusic.image),
+                    image: ImageDemonstrator(
+                      imageProvider: AssetImage(currentMusic.image),
+                    ),
                     titleText: currentMusic.title,
                     titleStyle: Theme.of(context)
                         .textTheme

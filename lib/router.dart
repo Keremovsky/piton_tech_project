@@ -3,10 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:piton_tech_project/core/constants/key_constants.dart';
 import 'package:piton_tech_project/core/constants/router_constants.dart';
 import 'package:piton_tech_project/core/services/storage_service.dart';
-import 'package:piton_tech_project/features/home/screens/home_screen.dart';
+import 'package:piton_tech_project/features/home/screens/desktop_home_screen.dart';
+import 'package:piton_tech_project/features/home/screens/mobile_home_screen.dart';
 import 'package:piton_tech_project/features/audio/screens/music_screen.dart';
 import 'package:piton_tech_project/features/on_board/screens/on_board_screen.dart';
 import 'package:piton_tech_project/features/notification/screens/notification_screen.dart';
+import 'package:piton_tech_project/responsive_layout.dart';
 
 class AppRouter {
   final GoRouter router = GoRouter(
@@ -16,7 +18,10 @@ class AppRouter {
         name: RouterConstants.homeScreenName,
         pageBuilder: (context, state) {
           return const MaterialPage(
-            child: HomeScreen(),
+            child: ResponsiveLayout(
+              mobileBody: MobileHomeScreen(),
+              desktopBody: DesktopHomeScreen(),
+            ),
           );
         },
       ),

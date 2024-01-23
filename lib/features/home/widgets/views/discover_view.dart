@@ -4,11 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:piton_tech_project/core/constants/data_constants.dart';
 import 'package:piton_tech_project/core/constants/router_constants.dart';
 import 'package:piton_tech_project/core/utils/custom_button.dart';
+import 'package:piton_tech_project/core/utils/image_demonstrator.dart';
 import 'package:piton_tech_project/features/audio/audio_service/audio_service.dart';
 import 'package:piton_tech_project/features/audio/widgets/music_box.dart';
 import 'package:piton_tech_project/models/music_model.dart';
 import 'package:piton_tech_project/themes/palette.dart';
 import 'package:piton_tech_project/themes/theme_constants.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 
 class DiscoverView extends ConsumerStatefulWidget {
   const DiscoverView({super.key});
@@ -23,6 +25,39 @@ class _DiscoverScreenState extends ConsumerState<DiscoverView> {
 
   final List<String> _categories = DataConstants().categories;
   final List<MusicModel> _musics = DataConstants().musicData;
+  final List<MusicBox> _musicBoxes = [];
+
+  void _createMusicBoxes() {
+    for (var i = 0; i < _musics.length; i++) {
+      _musicBoxes.add(
+        MusicBox(
+          onTap: () async {
+            await ref.read(audioServiceProvider.notifier).updateAudio(
+                  _musics,
+                  i,
+                );
+            if (mounted) {
+              context.pushNamed(RouterConstants.musicScreenName);
+            }
+          },
+          padding: i % 2 == 0
+              ? const EdgeInsets.only(right: 5, bottom: 10)
+              : const EdgeInsets.only(left: 5, bottom: 10),
+          titleText: _musics[i].title,
+          descriptionText: _musics[i].artist,
+          image: ImageDemonstrator(
+            imageProvider: AssetImage(_musics[i].image),
+          ),
+        ),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    _createMusicBoxes();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -32,6 +67,8 @@ class _DiscoverScreenState extends ConsumerState<DiscoverView> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Column(
       children: [
         TextField(
@@ -86,33 +123,9 @@ class _DiscoverScreenState extends ConsumerState<DiscoverView> {
         ),
         const SizedBox(height: 5),
         Expanded(
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1 / 1.4,
-            ),
-            itemCount: _musics.length,
-            itemBuilder: (BuildContext context, int index) {
-              return MusicBox(
-                onTap: () async {
-                  await ref.read(audioServiceProvider.notifier).updateAudio(
-                        _musics,
-                        index,
-                      );
-                  if (mounted) {
-                    context.pushNamed(RouterConstants.musicScreenName);
-                  }
-                },
-                image: Image.asset(
-                  _musics[index].image,
-                  fit: BoxFit.cover,
-                ),
-                titleText: _musics[index].title,
-                descriptionText: _musics[index].artist,
-              );
-            },
+          child: ResponsiveGridList(
+            desiredItemWidth: width / 3,
+            children: _musicBoxes,
           ),
         ),
       ],

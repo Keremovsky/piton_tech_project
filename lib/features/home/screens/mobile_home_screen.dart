@@ -5,18 +5,19 @@ import 'package:piton_tech_project/core/constants/router_constants.dart';
 import 'package:piton_tech_project/features/home/widgets/views/discover_view.dart';
 import 'package:piton_tech_project/features/home/widgets/views/library_view.dart';
 import 'package:piton_tech_project/features/notification/service/notification_service.dart';
+import 'package:piton_tech_project/themes/palette.dart';
 import 'package:piton_tech_project/themes/theme_constants.dart';
 import 'package:piton_tech_project/core/custom_icons_icons.dart';
 import 'package:piton_tech_project/features/home/widgets/custom_drawer.dart';
 
-class HomeScreen extends ConsumerStatefulWidget {
-  const HomeScreen({super.key});
+class MobileHomeScreen extends ConsumerStatefulWidget {
+  const MobileHomeScreen({super.key});
 
   @override
-  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<MobileHomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends ConsumerState<HomeScreen> {
+class _HomeScreenState extends ConsumerState<MobileHomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final PageController _pageController = PageController();
   int _currentIndex = 0;
@@ -84,7 +85,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ],
         ),
-        drawer: const CustomDrawer(),
+        drawer: const Drawer(
+          child: CustomDrawer(
+            color: Palette.background,
+            padding: EdgeInsets.only(
+              top: 35,
+              bottom: 10,
+              left: 10,
+              right: 10,
+            ),
+          ),
+        ),
         body: SafeArea(
           child: Padding(
             padding: ThemeConstants.screenPadding,

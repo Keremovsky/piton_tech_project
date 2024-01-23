@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:piton_tech_project/core/utils/image_demonstrator.dart';
 
 class MusicBox extends StatelessWidget {
   /// A widget that shows title, description and photo of music.
@@ -53,7 +54,7 @@ class MusicBox extends StatelessWidget {
   final BorderRadius? borderRadius;
   final EdgeInsets? padding;
   final EdgeInsets? innerPadding;
-  final Image image;
+  final ImageDemonstrator image;
   final String titleText;
   final TextStyle? titleStyle;
   final String descriptionText;
@@ -61,6 +62,7 @@ class MusicBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -76,15 +78,21 @@ class MusicBox extends StatelessWidget {
               style: titleStyle ?? Theme.of(context).textTheme.displayMedium,
             ),
             const SizedBox(height: 5),
-            Row(
-              children: [
-                Text(
-                  descriptionText,
-                  style: descriptionStyle ??
-                      Theme.of(context).textTheme.displaySmall,
-                ),
-              ],
-            ),
+            width > 600
+                ? Text(
+                    descriptionText,
+                    style: descriptionStyle ??
+                        Theme.of(context).textTheme.displaySmall,
+                  )
+                : Row(
+                    children: [
+                      Text(
+                        descriptionText,
+                        style: descriptionStyle ??
+                            Theme.of(context).textTheme.displaySmall,
+                      ),
+                    ],
+                  ),
           ],
         ),
       ),
