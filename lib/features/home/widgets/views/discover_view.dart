@@ -1,73 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:piton_tech_project/core/constants/data_constants.dart';
-import 'package:piton_tech_project/core/constants/router_constants.dart';
 import 'package:piton_tech_project/core/utils/custom_button.dart';
-import 'package:piton_tech_project/core/utils/image_demonstrator.dart';
-import 'package:piton_tech_project/features/audio/audio_service/audio_service.dart';
-import 'package:piton_tech_project/features/audio/widgets/music_box.dart';
+import 'package:piton_tech_project/features/home/widgets/category_view.dart';
 import 'package:piton_tech_project/models/music_model.dart';
 import 'package:piton_tech_project/themes/palette.dart';
 import 'package:piton_tech_project/themes/theme_constants.dart';
-import 'package:responsive_grid/responsive_grid.dart';
 
 class DiscoverView extends ConsumerStatefulWidget {
   const DiscoverView({super.key});
 
   @override
-  ConsumerState<DiscoverView> createState() => _DiscoverScreenState();
+  ConsumerState<DiscoverView> createState() => _DiscoverViewState();
 }
 
-class _DiscoverScreenState extends ConsumerState<DiscoverView> {
-  final TextEditingController _textController = TextEditingController();
+class _DiscoverViewState extends ConsumerState<DiscoverView>
+    with AutomaticKeepAliveClientMixin<DiscoverView> {
+  late final TextEditingController _textController;
+  late final PageController _pageController;
+  int _currentIndex = 0;
+
   final OutlineInputBorder _textFieldBorder = ThemeConstants().textFieldBorder;
 
   final List<String> _categories = DataConstants().categories;
-  final List<MusicModel> _musics = DataConstants().musicData;
-  final List<MusicBox> _musicBoxes = [];
+  final List<MusicModel> _musicData = DataConstants().musicData;
 
-  void _createMusicBoxes() {
-    for (var i = 0; i < _musics.length; i++) {
-      _musicBoxes.add(
-        MusicBox(
-          onTap: () async {
-            await ref.read(audioServiceProvider.notifier).updateAudio(
-                  _musics,
-                  i,
-                );
-            if (mounted) {
-              context.pushNamed(RouterConstants.musicScreenName);
-            }
-          },
-          padding: i % 2 == 0
-              ? const EdgeInsets.only(right: 5, bottom: 10)
-              : const EdgeInsets.only(left: 5, bottom: 10),
-          titleText: _musics[i].title,
-          descriptionText: _musics[i].artist,
-          image: ImageDemonstrator(
-            imageProvider: AssetImage(_musics[i].image),
-          ),
-        ),
-      );
-    }
-  }
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
-    _createMusicBoxes();
+    _textController = TextEditingController();
+    _pageController = PageController();
     super.initState();
   }
 
   @override
   void dispose() {
     _textController.dispose();
+    _pageController.dispose();
     super.dispose();
+  }
+
+  void _navigateToScreen(int index) {
+    _pageController.jumpToPage(index);
+    setState(() {
+      _currentIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    super.build(context);
 
     return Column(
       children: [
@@ -100,10 +84,20 @@ class _DiscoverScreenState extends ConsumerState<DiscoverView> {
             itemCount: _categories.length,
             itemBuilder: (BuildContext context, int index) {
               return CustomButton(
-                onTap: () {},
+                onTap: () {
+                  _navigateToScreen(index);
+                },
                 backgroundColor: Palette.button,
                 innerPadding: const EdgeInsets.symmetric(horizontal: 20),
                 borderRadius: BorderRadius.circular(36),
+                isState: index == _currentIndex,
+                stateChild: Text(
+                  _categories[index],
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayMedium!
+                      .copyWith(color: Palette.textGrey),
+                ),
                 child: Text(
                   _categories[index],
                   style: Theme.of(context).textTheme.displayMedium,
@@ -113,19 +107,16 @@ class _DiscoverScreenState extends ConsumerState<DiscoverView> {
           ),
         ),
         const SizedBox(height: 5),
-        Row(
-          children: [
-            Text(
-              "Trending",
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-          ],
-        ),
-        const SizedBox(height: 5),
         Expanded(
-          child: ResponsiveGridList(
-            desiredItemWidth: width / 3,
-            children: _musicBoxes,
+          child: PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              CategoryView(musics: _musicData),
+              CategoryView(musics: _musicData.sublist(1)),
+              CategoryView(musics: _musicData.sublist(2)),
+              CategoryView(musics: _musicData.sublist(3)),
+            ],
           ),
         ),
       ],

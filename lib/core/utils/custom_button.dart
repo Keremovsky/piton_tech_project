@@ -19,7 +19,11 @@ class CustomButton extends StatelessWidget {
   ///
   /// [innerPadding]: Padding of the child.
   ///
-  /// [child]: The content of the button.
+  /// [isState]: Bool value to help change child based on the state.
+  ///
+  /// [child]: The default content of the button.
+  ///
+  /// [stateChild]: The content of the button for false state.
   const CustomButton({
     super.key,
     required this.onTap,
@@ -30,7 +34,9 @@ class CustomButton extends StatelessWidget {
     this.borderRadius,
     this.padding,
     this.innerPadding,
+    this.isState = true,
     required this.child,
+    this.stateChild,
   });
 
   final Function() onTap;
@@ -41,7 +47,9 @@ class CustomButton extends StatelessWidget {
   final BorderRadius? borderRadius;
   final EdgeInsets? padding;
   final EdgeInsets? innerPadding;
+  final bool isState;
   final Widget child;
+  final Widget? stateChild;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +69,7 @@ class CustomButton extends StatelessWidget {
             borderRadius: borderRadius,
             child: Padding(
               padding: innerPadding ?? const EdgeInsets.only(),
-              child: Center(child: child),
+              child: Center(child: isState ? child : stateChild),
             ),
           ),
         ),
