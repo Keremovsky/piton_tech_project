@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:piton_tech_project/core/constants/assets_constants.dart';
+import 'package:piton_tech_project/core/constants/data_constants.dart';
 import 'package:piton_tech_project/core/constants/router_constants.dart';
 import 'package:piton_tech_project/core/utils/custom_button.dart';
-import 'package:piton_tech_project/features/on_board/views/first_on_board.dart';
-import 'package:piton_tech_project/features/on_board/views/last_on_board.dart';
-import 'package:piton_tech_project/features/on_board/views/second_on_board.dart';
+import 'package:piton_tech_project/core/utils/image_demonstrator.dart';
+import 'package:piton_tech_project/features/on_board/widget/on_board_view.dart';
 import 'package:piton_tech_project/themes/palette.dart';
 import 'package:piton_tech_project/themes/theme_constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -41,10 +42,45 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             children: [
               PageView(
                 controller: _pageController,
-                children: const [
-                  FirstOnBoardView(),
-                  SecondOnBoardView(),
-                  LastOnBoardView(),
+                children: [
+                  OnBoardView(
+                    title: "Start Adventure",
+                    description: DataConstants().onBoardText,
+                    image: ImageDemonstrator(
+                      height: ThemeConstants.onBoardPhotoHeight,
+                      imageProvider:
+                          const AssetImage(AssetsConstants.firstOnBoard),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                  OnBoardView(
+                    title: "Podkes",
+                    description: DataConstants().onBoardText,
+                    image: const ImageDemonstrator(
+                      height: ThemeConstants.onBoardPhotoHeight,
+                      imageProvider: AssetImage(AssetsConstants.secondOnBoard),
+                      borderRadius: BorderRadius.only(
+                        topLeft:
+                            Radius.circular(ThemeConstants.onBoardPhotoRadius),
+                        topRight:
+                            Radius.circular(ThemeConstants.onBoardPhotoRadius),
+                      ),
+                    ),
+                  ),
+                  OnBoardView(
+                    title: "Welcome!",
+                    description: DataConstants().onBoardText,
+                    image: const ImageDemonstrator(
+                      height: ThemeConstants.onBoardPhotoHeight,
+                      imageProvider: AssetImage(AssetsConstants.lastOnBoard),
+                      borderRadius: BorderRadius.only(
+                        topLeft:
+                            Radius.circular(ThemeConstants.onBoardPhotoRadius),
+                        bottomRight:
+                            Radius.circular(ThemeConstants.onBoardPhotoRadius),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               Align(
