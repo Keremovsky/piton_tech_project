@@ -30,6 +30,13 @@ class AudioService extends StateNotifier<List<MusicModel>> {
 
   MusicModel get currentMusic => state[index];
 
+  Stream<MusicModel> get currentMusicStream async* {
+    while (true) {
+      await Future.delayed(const Duration(milliseconds: 100));
+      yield state[index];
+    }
+  }
+
   Future<void> updateAudio(List<MusicModel> musics, int index) async {
     state = musics;
     this.index = index;
@@ -53,7 +60,7 @@ class AudioService extends StateNotifier<List<MusicModel>> {
   }
 
   Future<void> nextAudio() async {
-    // if it is not last audio, update cached musics
+    // if it is not last audio, update music
     if (state.length - 1 != index) {
       index = index + 1;
       await _updateCurrentAudio();
@@ -69,7 +76,7 @@ class AudioService extends StateNotifier<List<MusicModel>> {
     if (currentPosition.inSeconds >= 5) {
       await _audioPlayer.seek(Duration.zero);
     } else {
-      // if it is not first audio, update cached musics
+      // if it is not first audio, update music
       if (index != 0) {
         index = index - 1;
         await _updateCurrentAudio();

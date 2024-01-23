@@ -87,5 +87,5 @@ final ThemeData _theme = ThemeData(
     ),
     iconTheme: const IconThemeData(
       color: Palette.fullWhite,
-      size: 24,
+      size: 26,
     ));
