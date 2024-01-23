@@ -53,73 +53,76 @@ class _DiscoverViewState extends ConsumerState<DiscoverView>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Column(
-      children: [
-        TextField(
-          controller: _textController,
-          style: Theme.of(context).textTheme.displayMedium,
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Palette.bottomBar,
-            hintText: "Search",
-            hintStyle: Theme.of(context)
-                .textTheme
-                .displayMedium!
-                .copyWith(color: Palette.textGrey),
-            contentPadding: const EdgeInsets.all(15),
-            suffixIcon: const Icon(
-              Icons.search,
-              size: 28,
-              color: Palette.iconGrey,
+    return Padding(
+      padding: ThemeConstants.screenPadding,
+      child: Column(
+        children: [
+          TextField(
+            controller: _textController,
+            style: Theme.of(context).textTheme.displayMedium,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Palette.bottomBar,
+              hintText: "Search",
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .displayMedium!
+                  .copyWith(color: Palette.textGrey),
+              contentPadding: const EdgeInsets.all(15),
+              suffixIcon: const Icon(
+                Icons.search,
+                size: 28,
+                color: Palette.iconGrey,
+              ),
+              enabledBorder: _textFieldBorder,
+              focusedBorder: _textFieldBorder,
             ),
-            enabledBorder: _textFieldBorder,
-            focusedBorder: _textFieldBorder,
           ),
-        ),
-        const SizedBox(height: 10),
-        SizedBox(
-          height: 36,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: _categories.length,
-            itemBuilder: (BuildContext context, int index) {
-              return CustomButton(
-                onTap: () {
-                  _navigateToScreen(index);
-                },
-                backgroundColor: Palette.button,
-                innerPadding: const EdgeInsets.symmetric(horizontal: 20),
-                borderRadius: BorderRadius.circular(36),
-                isState: index == _currentIndex,
-                stateChild: Text(
-                  _categories[index],
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayMedium!
-                      .copyWith(color: Palette.textGrey),
-                ),
-                child: Text(
-                  _categories[index],
-                  style: Theme.of(context).textTheme.displayMedium,
-                ),
-              );
-            },
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 36,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _categories.length,
+              itemBuilder: (BuildContext context, int index) {
+                return CustomButton(
+                  onTap: () {
+                    _navigateToScreen(index);
+                  },
+                  backgroundColor: Palette.button,
+                  innerPadding: const EdgeInsets.symmetric(horizontal: 20),
+                  borderRadius: BorderRadius.circular(36),
+                  isState: index == _currentIndex,
+                  stateChild: Text(
+                    _categories[index],
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayMedium!
+                        .copyWith(color: Palette.textGrey),
+                  ),
+                  child: Text(
+                    _categories[index],
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-        const SizedBox(height: 5),
-        Expanded(
-          child: PageView(
-            controller: _pageController,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              CategoryView(musics: _musicData),
-              CategoryView(musics: _musicData.sublist(1)),
-              CategoryView(musics: _musicData.sublist(2)),
-              CategoryView(musics: _musicData.sublist(3)),
-            ],
+          const SizedBox(height: 5),
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                CategoryView(musics: _musicData),
+                CategoryView(musics: _musicData.sublist(1)),
+                CategoryView(musics: _musicData.sublist(2)),
+                CategoryView(musics: _musicData.sublist(3)),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

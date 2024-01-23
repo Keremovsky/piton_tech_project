@@ -9,4 +9,6 @@ class AssetsConstants {
   static const rammstein = "assets/images/rammstein.jpg";
   static const goldenRequiem = "assets/images/golden_requiem.jpg";
   static const feelGood = "assets/images/feel_good.jpg";
+  static const backgroundPic = "assets/images/backgroundPic.jpg";
+  static const profilePic = "assets/images/profilePic.jpeg";
 }

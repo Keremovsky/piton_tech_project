@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:piton_tech_project/features/home/widgets/custom_drawer.dart';
 import 'package:piton_tech_project/features/home/widgets/views/discover_view.dart';
 import 'package:piton_tech_project/features/home/widgets/views/library_view.dart';
+import 'package:piton_tech_project/features/home/widgets/views/profile_view.dart';
 import 'package:piton_tech_project/themes/palette.dart';
 import 'package:piton_tech_project/themes/theme_constants.dart';
 
@@ -65,7 +66,7 @@ class _HomeScreenState extends ConsumerState<DesktopHomeScreen> {
                     children: const [
                       DiscoverView(),
                       LibraryView(),
-                      Text("Profile"),
+                      ProfileView(),
                     ],
                   ),
                 ),

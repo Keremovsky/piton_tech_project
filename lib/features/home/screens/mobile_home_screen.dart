@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:piton_tech_project/core/constants/router_constants.dart';
 import 'package:piton_tech_project/features/home/widgets/views/discover_view.dart';
 import 'package:piton_tech_project/features/home/widgets/views/library_view.dart';
+import 'package:piton_tech_project/features/home/widgets/views/profile_view.dart';
 import 'package:piton_tech_project/features/notification/service/notification_service.dart';
 import 'package:piton_tech_project/themes/palette.dart';
-import 'package:piton_tech_project/themes/theme_constants.dart';
 import 'package:piton_tech_project/core/custom_icons_icons.dart';
 import 'package:piton_tech_project/features/home/widgets/custom_drawer.dart';
 
@@ -97,17 +97,14 @@ class _HomeScreenState extends ConsumerState<MobileHomeScreen> {
           ),
         ),
         body: SafeArea(
-          child: Padding(
-            padding: ThemeConstants.screenPadding,
-            child: PageView(
-              controller: _pageController,
-              physics: const NeverScrollableScrollPhysics(),
-              children: const [
-                DiscoverView(),
-                LibraryView(),
-                Text("Profile"),
-              ],
-            ),
+          child: PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: const [
+              DiscoverView(),
+              LibraryView(),
+              ProfileView(),
+            ],
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(

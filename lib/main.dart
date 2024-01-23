@@ -6,14 +6,16 @@ import 'package:piton_tech_project/core/services/storage_service.dart';
 import 'package:piton_tech_project/router.dart';
 import 'package:piton_tech_project/themes/palette.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // initialize storage service
   StorageService();
 
   final router = AppRouter().router;
-  runApp(ProviderScope(child: MyApp(router: router)));
+  runApp(
+    ProviderScope(child: MyApp(router: router)),
+  );
 }
 
 class MyApp extends StatelessWidget {
